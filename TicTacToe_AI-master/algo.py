@@ -1,3 +1,4 @@
+#computer uses O and player uses X
 class Algo:
 	def __init__(self):
 		self.board = ['-','-','-',
@@ -5,7 +6,7 @@ class Algo:
 					'-','-','-',
 					'-','-','-',]
 
-	def check_win(self):
+	def check_win(self):  #check if player or computer has won
 		win = False
 		#horizontal win
 		if self.board[0] == self.board[1] and self.board[1] == self.board[2] and self.board[2] != '-':
@@ -28,7 +29,7 @@ class Algo:
 			win = True
 		return win
 
-	def check_draw(self):
+	def check_draw(self):    #check for condition of draw
 		draw = True
 		for x in range(0,9):
 			if self.board[x] == '-':
@@ -37,17 +38,17 @@ class Algo:
 		return draw
 
 	def minimax(self, isAI):
-		if self.check_win():
-			if isAI:
+		if self.check_win():  #if any one wins then true
+			if isAI:          #if computer wins
 				score = 1
-			else:
+			else:             #if player wins
 				score = -1
 
-		elif self.check_draw():
+		elif self.check_draw():  #if draw takes place
 			score = 0
 		
 		else:
-			#The next move is for the player. The player will minimize the score
+			#The next move is for the player. The player will want to minimize the score
 			if isAI:
 				bestScore = 1000
 				bestMove = -1
@@ -63,7 +64,7 @@ class Algo:
 						
 				score = bestScore
 
-			#The next move is for the computer. The computer will maximize the score
+			#The next move is for the computer. The computer will try to maximize the score
 			else:
 				bestScore = -1000
 				bestMove = -1
@@ -79,16 +80,17 @@ class Algo:
 				score =  bestScore
 		return score
 
-	def ai_choice(self):
+#bestScore stores the value of the best score from minimax and bestMove stores the locatio where computer should move O to
+	def ai_choice(self):   #the computer chooses to put O and try for all plaecs to maximize its utility or score
 		bestScore = -1000
 		bestMove = -1
-		for x in range(0,9):
+		for x in range(0,9):     #check all places one by one if not occupied
 			if self.board[x]=="-":
 				self.board[x] = 'O'
 				moveScore = self.minimax(True)
-				self.board[x] = '-'
+				self.board[x] = '-'       #replace blank to try other places for O
 
-				if moveScore>bestScore:
+				if moveScore>bestScore:     #maximize the bestScore
 					bestScore = moveScore
 					bestMove = x
 		return bestMove

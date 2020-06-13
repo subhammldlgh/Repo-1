@@ -20,7 +20,7 @@ class Login(GridLayout):
         super().__init__(**kwargs)
         self.cols = 2
         self.add_widget(Label(font_size = 40, text="Tic Tac Toe"))
-        self.add_widget(Label(text="---RS_Games", font_size=20))
+        self.add_widget(Label(text="Subham_Games", font_size=20))
         self.add_widget(Label(text="Player X:", font_size=20))
         self.player_x = TextInput(multiline=False, font_size=20)
         self.add_widget(self.player_x)
